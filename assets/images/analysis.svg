@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#ffffff"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- report sheet -->
+    <path d="M112 180 Q112 165 128 165 H292 L338 211 V440 Q338 455 323 455 H128 Q112 455 112 440Z" fill="#f8fbff" stroke="#cbdcf0" stroke-width="3"/>
+    <path d="M292 165 V198 Q292 211 305 211 H338" fill="#dbeafe" stroke="#cbdcf0" stroke-width="3"/>
+    <rect x="139" y="198" width="116" height="11" rx="5.5" fill="#b8cce4"/>
+    <path d="M143 344 H304" stroke="#c2d4e8" stroke-width="5"/>
+    <rect x="148" y="297" width="22" height="47" rx="3" fill="#1677d2"/>
+    <rect x="181" y="276" width="22" height="68" rx="3" fill="#168ee5"/>
+    <rect x="214" y="251" width="22" height="93" rx="3" fill="#25a5ee"/>
+    <rect x="247" y="229" width="22" height="115" rx="3" fill="#35b889"/>
+    <circle cx="184" cy="390" r="29" fill="#087bd5"/>
+    <path d="M184 390 L184 361 A29 29 0 0 1 209 405Z" fill="#36b889"/>
+    <path d="M184 390 L209 405 A29 29 0 0 1 160 412Z" fill="#0b4e91"/>
+    <path d="M229 379 H303 M229 397 H292 M229 415 H276" stroke="#c2d4e8" stroke-width="8"/>
+    <!-- laptop -->
+    <rect x="300" y="100" width="480" height="335" rx="20" fill="#0c2b50" stroke="#09213e" stroke-width="4"/>
+    <circle cx="540" cy="115" r="4" fill="#6c8fb6"/>
+    <rect x="320" y="133" width="440" height="278" rx="5" fill="#ffffff"/>
+    <rect x="344" y="154" width="82" height="12" rx="6" fill="#d4e7fb"/>
+    <!-- line chart -->
+    <g stroke="#e2edf8" stroke-width="1.5">
+      <path d="M348 190 H566 M348 225 H566 M348 260 H566 M348 295 H566"/>
+      <path d="M348 184 V302 M392 184 V302 M436 184 V302 M480 184 V302 M524 184 V302 M566 184 V302"/>
+    </g>
+    <path d="M350 280 L385 250 L417 269 L453 231 L487 246 L523 208 L558 185 L558 302 L350 302Z" fill="#d8ecff" opacity=".9"/>
+    <path d="M350 280 L385 250 L417 269 L453 231 L487 246 L523 208 L558 185" fill="none" stroke="#087fe0" stroke-width="5"/>
+    <g fill="#087fe0">
+      <circle cx="350" cy="280" r="6"/><circle cx="385" cy="250" r="6"/><circle cx="417" cy="269" r="6"/>
+      <circle cx="453" cy="231" r="6"/><circle cx="487" cy="246" r="6"/><circle cx="523" cy="208" r="6"/><circle cx="558" cy="185" r="6"/>
+    </g>
+    <!-- donut chart -->
+    <circle cx="680" cy="216" r="42" fill="none" stroke="#d9e9f7" stroke-width="18"/>
+    <circle cx="680" cy="216" r="42" fill="none" stroke="#168fe5" stroke-width="18" stroke-dasharray="132 132" transform="rotate(-90 680 216)"/>
+    <circle cx="680" cy="216" r="42" fill="none" stroke="#36b889" stroke-width="18" stroke-dasharray="66 198" stroke-dashoffset="-132" transform="rotate(-90 680 216)"/>
+    <!-- dashboard bars -->
+    <path d="M350 374 H565" stroke="#e0ebf6" stroke-width="2"/>
+    <rect x="358" y="340" width="25" height="34" rx="3" fill="#2ab3ef"/>
+    <rect x="394" y="319" width="25" height="55" rx="3" fill="#1e9ee9"/>
+    <rect x="430" y="292" width="25" height="82" rx="3" fill="#168fe5"/>
+    <rect x="466" y="306" width="25" height="68" rx="3" fill="#0b70c8"/>
+    <rect x="502" y="277" width="25" height="97" rx="3" fill="#35b889"/>
+    <path d="M594 315 H724 M594 337 H710 M594 359 H691" stroke="#d3e2f1" stroke-width="9"/>
+    <!-- laptop base -->
+    <path d="M275 437 H805 L836 456 Q840 462 826 462 H260 Q248 462 254 455Z" fill="#b8cbe0" stroke="#718cab" stroke-width="3"/>
+    <rect x="473" y="441" width="113" height="7" rx="3.5" fill="#718cab"/>
+    <!-- magnifying glass -->
+    <circle cx="447" cy="363" r="86" fill="#ffffff" fill-opacity=".32" stroke="#0c2b50" stroke-width="13"/>
+    <circle cx="447" cy="363" r="73" fill="none" stroke="#b7e2ff" stroke-width="5"/>
+    <path d="M387 423 L326 486 Q316 497 327 508 L338 519 Q349 529 360 517 L422 453" fill="#123c68" stroke="#0c2b50" stroke-width="8"/>
+    <path d="M394 421 L347 469" stroke="#5f8bb8" stroke-width="7"/>
+  </g>
+</svg>
