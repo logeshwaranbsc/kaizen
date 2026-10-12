@@ -8,8 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.getElementById('navLinks');
 
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navLinks.classList.toggle('show');
+      navToggle.classList.toggle('active', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('show') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        navLinks.classList.remove('show');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
@@ -32,9 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         e.preventDefault();
-        if (navLinks) navLinks.classList.remove('show');
+        if (navLinks) {
+          navLinks.classList.remove('show');
+          if (navToggle) {
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+          }
+        }
         
-        const headerOffset = 80;
+        const headerOffset = window.innerWidth <= 768 ? 68 : 80;
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -95,6 +113,56 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCarousel();
     });
   });
+
+  // Touch swipe support for testimonials on mobile
+  const testimonialsGrid = document.querySelector('.testimonials-grid');
+  if (testimonialsGrid) {
+    let tStartX = 0;
+    let tStartY = 0;
+    let tEndX = 0;
+    let tEndY = 0;
+
+    testimonialsGrid.addEventListener('touchstart', (e) => {
+      tStartX = e.changedTouches[0].screenX;
+      tStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    testimonialsGrid.addEventListener('touchend', (e) => {
+      tEndX = e.changedTouches[0].screenX;
+      tEndY = e.changedTouches[0].screenY;
+      const diffX = tEndX - tStartX;
+      const diffY = tEndY - tStartY;
+
+      // Ensure horizontal swipe is more significant than vertical scroll
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          // Swipe left -> Next
+          currentSlide = (currentSlide < dots.length - 1) ? currentSlide + 1 : 0;
+        } else {
+          // Swipe right -> Prev
+          currentSlide = (currentSlide > 0) ? currentSlide - 1 : dots.length - 1;
+        }
+        updateCarousel();
+      }
+    }, { passive: true });
+  }
+
+  // Toggle Extra Industries on Mobile/Desktop
+  const viewAllIndustriesBtn = document.getElementById('viewAllIndustriesBtn');
+  const extraIndustry = document.querySelector('.extra-industry');
+  if (viewAllIndustriesBtn && extraIndustry) {
+    viewAllIndustriesBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isHidden = extraIndustry.style.display === 'none' || extraIndustry.style.display === '';
+      if (isHidden) {
+        extraIndustry.style.display = 'flex';
+        viewAllIndustriesBtn.textContent = 'Show Less \u2191';
+      } else {
+        extraIndustry.style.display = 'none';
+        viewAllIndustriesBtn.innerHTML = 'View All Industries &rarr;';
+      }
+    });
+  }
 
   window.addEventListener('resize', updateCarousel);
   updateCarousel();
