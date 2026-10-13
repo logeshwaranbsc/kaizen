@@ -493,4 +493,41 @@ document.addEventListener('DOMContentLoaded', () => {
       counterObserver.observe(counter);
     });
   }
+
+  // 9. Bottom-to-Top Section Arrival Scroll Animations
+  document.body.classList.add('reveal-animations-active');
+
+  const revealSections = document.querySelectorAll('.reveal-on-scroll');
+  if ('IntersectionObserver' in window && revealSections.length > 0) {
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          entry.target.addEventListener('transitionend', () => {
+            entry.target.classList.add('reveal-done');
+          }, { once: true });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      // If section is already visible or near top on load/refresh, reveal smoothly
+      if (rect.top < window.innerHeight - 30) {
+        setTimeout(() => {
+          section.classList.add('is-revealed');
+        }, 80);
+      } else {
+        sectionObserver.observe(section);
+      }
+    });
+  } else {
+    revealSections.forEach(section => section.classList.add('is-revealed'));
+  }
 });
+
