@@ -1196,80 +1196,118 @@
 
           <!-- Form Card -->
           <div class="form-card">
-            <h3 class="form-card-title">Request a Discovery Call</h3>
-            <form id="discoveryForm" class="form-grid">
-              <div class="form-group">
-                <label for="fullName">Full Name*</label>
-                <input type="text" id="fullName" class="form-control" required>
+            <div class="form-card-header">
+              <h3 class="form-card-title">Request a Discovery Call</h3>
+              <!-- 2-Step Progress Indicator -->
+              <div class="form-steps-indicator" aria-label="Form Steps Progress">
+                <div class="step-pill active" id="stepPill1">
+                  <span class="step-circle">1</span>
+                  <span class="step-title">Your Details</span>
+                </div>
+                <div class="step-connector" id="stepConnector"></div>
+                <div class="step-pill" id="stepPill2">
+                  <span class="step-circle">2</span>
+                  <span class="step-title">Schedule &amp; Focus</span>
+                </div>
+              </div>
+            </div>
+
+            <form id="discoveryForm">
+              <!-- STEP 1: First Few Fields (Contact & Company Info) -->
+              <div class="form-step-panel active" id="formStep1">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="fullName">Full Name*</label>
+                    <input type="text" id="fullName" class="form-control" placeholder="e.g. Ramesh Kumar" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="workEmail">Work Email*</label>
+                    <input type="email" id="workEmail" class="form-control" placeholder="ramesh@company.com" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="phone">Phone*</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="+91 98765 43210" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="company">Company*</label>
+                    <input type="text" id="company" class="form-control" placeholder="Your Company Name" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="industry">Industry*</label>
+                    <select id="industry" class="form-control" required>
+                      <option value="" disabled selected>Select Industry</option>
+                      <option value="Solar Energy">Solar Energy</option>
+                      <option value="Construction">Construction</option>
+                      <option value="Logistics">Logistics</option>
+                      <option value="Transportation">Transportation</option>
+                      <option value="Cosmetics">Cosmetics</option>
+                      <option value="Timber">Timber</option>
+                      <option value="Manufacturing">Manufacturing</option>
+                      <option value="Engineering">Engineering</option>
+                      <option value="Trading">Trading & Distribution</option>
+                      <option value="Services">Professional Services</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="companySize">Company Size*</label>
+                    <select id="companySize" class="form-control" required>
+                      <option value="" disabled selected>Select Size</option>
+                      <option value="1-10">1-10 employees</option>
+                      <option value="11-50">11-50 employees</option>
+                      <option value="51-200">51-200 employees</option>
+                      <option value="201+">201+ employees</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-actions-row single">
+                  <button type="button" class="btn btn-primary next-step-btn" id="nextStepBtn">
+                    Next Step &rarr;
+                  </button>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label for="workEmail">Work Email*</label>
-                <input type="email" id="workEmail" class="form-control" required>
-              </div>
+              <!-- STEP 2: Remaining Fields (Operational Challenge & Meeting Time) -->
+              <div class="form-step-panel" id="formStep2">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="challenge">Current Business Challenge*</label>
+                    <textarea id="challenge" class="form-control"
+                      placeholder="Describe your current operational challenges..." required></textarea>
+                  </div>
 
-              <div class="form-group">
-                <label for="phone">Phone*</label>
-                <input type="tel" id="phone" class="form-control" required>
-              </div>
+                  <div class="form-group">
+                    <label for="lookingToImprove">What are you looking to improve?</label>
+                    <textarea id="lookingToImprove" class="form-control"
+                      placeholder="E.g., SOPs, Role Clarity, Automation, Review Meetings..."></textarea>
+                  </div>
 
-              <div class="form-group">
-                <label for="company">Company*</label>
-                <input type="text" id="company" class="form-control" required>
-              </div>
+                  <div class="form-group">
+                    <label for="prefDate">Preferred Date*</label>
+                    <input type="date" id="prefDate" class="form-control" required>
+                  </div>
 
-              <div class="form-group">
-                <label for="industry">Industry*</label>
-                <select id="industry" class="form-control" required>
-                  <option value="" disabled selected>Select Industry</option>
-                  <option value="Solar Energy">Solar Energy</option>
-                  <option value="Construction">Construction</option>
-                  <option value="Logistics">Logistics</option>
-                  <option value="Transportation">Transportation</option>
-                  <option value="Cosmetics">Cosmetics</option>
-                  <option value="Timber">Timber</option>
-                  <option value="Manufacturing">Manufacturing</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="Trading">Trading & Distribution</option>
-                  <option value="Services">Professional Services</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
+                  <div class="form-group">
+                    <label for="prefTime">Preferred Time*</label>
+                    <input type="time" id="prefTime" class="form-control" required>
+                  </div>
+                </div>
 
-              <div class="form-group">
-                <label for="companySize">Company Size*</label>
-                <select id="companySize" class="form-control" required>
-                  <option value="" disabled selected>Select Size</option>
-                  <option value="1-10">1-10 employees</option>
-                  <option value="11-50">11-50 employees</option>
-                  <option value="51-200">51-200 employees</option>
-                  <option value="201+">201+ employees</option>
-                </select>
+                <div class="form-actions-row dual">
+                  <button type="button" class="btn btn-outline back-step-btn" id="prevStepBtn">
+                    &larr; Back
+                  </button>
+                  <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
+                    Request a Discovery Call &rarr;
+                  </button>
+                </div>
               </div>
-
-              <div class="form-group">
-                <label for="challenge">Current Business Challenge*</label>
-                <textarea id="challenge" class="form-control"
-                  placeholder="Describe your current operational challenges..." required></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="lookingToImprove">What are you looking to improve?</label>
-                <textarea id="lookingToImprove" class="form-control"
-                  placeholder="E.g., SOPs, Role Clarity, Automation, Review Meetings..."></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="prefDate">Preferred Date*</label>
-                <input type="date" id="prefDate" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="prefTime">Preferred Time*</label>
-                <input type="time" id="prefTime" class="form-control" required>
-              </div>
-
-              <button type="submit" class="btn btn-primary submit-btn">Request a Discovery Call &rarr;</button>
             </form>
           </div>
         </div>

@@ -167,12 +167,97 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updateCarousel);
   updateCarousel();
 
-  // 5. Contact Form Handling
+  // 5. Contact Form Handling (2-Step Multi-Step Form)
   const discoveryForm = document.getElementById('discoveryForm');
+  const formStep1 = document.getElementById('formStep1');
+  const formStep2 = document.getElementById('formStep2');
+  const nextStepBtn = document.getElementById('nextStepBtn');
+  const prevStepBtn = document.getElementById('prevStepBtn');
+  const stepPill1 = document.getElementById('stepPill1');
+  const stepPill2 = document.getElementById('stepPill2');
+  const stepConnector = document.getElementById('stepConnector');
+
+  function validateStep1() {
+    if (!formStep1) return false;
+    const inputs = formStep1.querySelectorAll('input, select');
+    for (let input of inputs) {
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        input.focus();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function goToStep(step) {
+    if (step === 2) {
+      if (!validateStep1()) return;
+      formStep1.classList.remove('active');
+      formStep2.classList.add('active');
+
+      if (stepPill1) {
+        stepPill1.classList.remove('active');
+        stepPill1.classList.add('completed');
+        const c1 = stepPill1.querySelector('.step-circle');
+        if (c1) c1.innerHTML = '&#10003;';
+      }
+      if (stepConnector) stepConnector.classList.add('active');
+      if (stepPill2) {
+        stepPill2.classList.add('active');
+        stepPill2.classList.remove('completed');
+      }
+    } else if (step === 1) {
+      if (formStep2) formStep2.classList.remove('active');
+      if (formStep1) formStep1.classList.add('active');
+
+      if (stepPill1) {
+        stepPill1.classList.add('active');
+        stepPill1.classList.remove('completed');
+        const c1 = stepPill1.querySelector('.step-circle');
+        if (c1) c1.textContent = '1';
+      }
+      if (stepConnector) stepConnector.classList.remove('active');
+      if (stepPill2) {
+        stepPill2.classList.remove('active');
+        stepPill2.classList.remove('completed');
+      }
+    }
+  }
+
+  if (nextStepBtn) {
+    nextStepBtn.addEventListener('click', () => {
+      goToStep(2);
+    });
+  }
+
+  if (prevStepBtn) {
+    prevStepBtn.addEventListener('click', () => {
+      goToStep(1);
+    });
+  }
+
+  if (stepPill1) {
+    stepPill1.addEventListener('click', () => {
+      goToStep(1);
+    });
+  }
+
+  if (stepPill2) {
+    stepPill2.addEventListener('click', () => {
+      goToStep(2);
+    });
+  }
+
   if (discoveryForm) {
     discoveryForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      
+
+      if (!validateStep1()) {
+        goToStep(1);
+        return;
+      }
+
       const submitBtn = discoveryForm.querySelector('.submit-btn');
       const originalText = submitBtn.innerHTML;
 
@@ -182,6 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         alert('Thank you! Your request for a Discovery Call has been submitted successfully. Our team will get in touch with you shortly.');
         discoveryForm.reset();
+        goToStep(1);
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
       }, 1000);
@@ -234,11 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
       stepperDots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === currentPillar);
       });
-
-      // 3. Update Right Column Navigator
-      pillarNavItems.forEach((item, idx) => {
-        item.classList.toggle('active', idx === currentPillar);
-      });
     }
 
     function onScrollPillars() {
@@ -279,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', onScrollPillars, { passive: true });
 
-    // Smooth scroll to specific card when clicking pillar nav items or stepper dots
+    // Smooth scroll to specific card when clicking stepper dots
     function scrollToPillar(idx) {
       const isMobile = window.innerWidth <= 1024;
       updatePillarDisplay(idx);
@@ -312,16 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Attach click events
+    // Attach click events to stepper dots
     stepperDots.forEach((dot, idx) => {
       dot.addEventListener('click', (e) => {
-        e.preventDefault();
-        scrollToPillar(idx);
-      });
-    });
-
-    pillarNavItems.forEach((item, idx) => {
-      item.addEventListener('click', (e) => {
         e.preventDefault();
         scrollToPillar(idx);
       });
