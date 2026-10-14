@@ -512,21 +512,56 @@ h1, h2, h3, .serif-font {
   color: var(--primary-teal, #0D5C58);
 }
 
-.logo-cloud {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1.5rem;
-  align-items: center;
+/* Marquee Container with smooth gradient masks */
+.logo-marquee-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0.35rem 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
 }
 
-.logo-item {
+.logo-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  will-change: transform;
+}
+
+.logo-marquee-group {
   display: flex;
   align-items: center;
+  gap: 3.75rem;
+  padding-right: 3.75rem;
+  flex-shrink: 0;
+  animation: logoMarqueeScroll 28s linear infinite;
+}
+
+.logo-marquee-container:hover .logo-marquee-group {
+  animation-play-state: paused;
+}
+
+@keyframes logoMarqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Enlarged High-Impact Logo Items */
+.logo-item {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  height: 48px;
+  height: 68px;
+  min-width: 120px;
+  flex-shrink: 0;
   background: transparent;
   border: none;
-  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  transition: transform var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
 }
 
 .logo-item:hover {
@@ -534,15 +569,74 @@ h1, h2, h3, .serif-font {
 }
 
 .logo-item img {
-  max-height: 42px;
-  max-width: 100%;
+  max-height: 58px;
+  max-width: 200px;
   width: auto;
   height: auto;
   object-fit: contain;
+  opacity: 0.95;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
+.logo-item:hover img {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Square Emblem Badge (e.g. Vainavi) */
+.logo-item img.logo-badge-img {
+  max-height: 58px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Typographic Wordmark for brand names without images */
+.logo-wordmark {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #334155;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0.92;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+}
+
+.logo-item:hover .logo-wordmark {
+  opacity: 1;
+  color: var(--primary-teal, #0D5C58);
+  transform: scale(1.06);
+}
+
+.logo-wordmark .logo-wm-bold {
+  font-weight: 850;
+  color: var(--primary-teal, #0D5C58);
+}
+
+.logo-wordmark .logo-wm-accent {
+  font-weight: 850;
+  color: #C06014;
+}
+
+.logo-wordmark .logo-wm-sub {
+  font-weight: 500;
+  color: var(--text-muted, #64748B);
+}
+
+/* Smart Image / Wordmark fallback */
 .logo-item img[src=""],
 .logo-item img:not([src]) {
+  display: none;
+}
+
+.logo-item img[src]:not([src=""]) + .logo-wordmark {
   display: none;
 }
 
@@ -2575,9 +2669,20 @@ textarea.form-control {
     text-align: center;
   }
   
-  .logo-cloud {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  .logo-marquee-group {
+    gap: 2.75rem;
+    padding-right: 2.75rem;
+    animation-duration: 22s;
+  }
+
+  .logo-item {
+    height: 56px;
+    min-width: 100px;
+  }
+
+  .logo-item img {
+    max-height: 46px;
+    max-width: 150px;
   }
   
   .metrics-row {
@@ -3238,18 +3343,25 @@ textarea.form-control {
     height: 230px;
   }
 
-  /* Trusted Section */
-  .logo-cloud {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.85rem 0.5rem;
+  /* Trusted Section Marquee */
+  .logo-marquee-group {
+    gap: 2rem;
+    padding-right: 2rem;
+    animation-duration: 18s;
   }
 
   .logo-item {
-    height: 40px;
+    height: 48px;
+    min-width: 85px;
   }
 
   .logo-item img {
-    max-height: 34px;
+    max-height: 40px;
+    max-width: 130px;
+  }
+
+  .logo-wordmark {
+    font-size: 0.92rem;
   }
 
   .metric-num {
