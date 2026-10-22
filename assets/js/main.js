@@ -323,38 +323,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onScrollPillars() {
-      const isMobile = window.innerWidth <= 1024;
       if (isClickScrolling) return;
 
       const rect = servicePillarsSection.getBoundingClientRect();
-      const navbarHeight = 80;
+      const navbarHeight = window.innerWidth <= 768 ? 68 : 80;
 
-      if (!isMobile) {
-        const totalScrollable = servicePillarsSection.offsetHeight - (window.innerHeight - navbarHeight);
-        if (totalScrollable <= 0) return;
+      const totalScrollable = servicePillarsSection.offsetHeight - (window.innerHeight - navbarHeight);
+      if (totalScrollable <= 0) return;
 
-        // Scrolled distance within the pinned section
-        const scrolled = -(rect.top - navbarHeight);
-        const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+      // Scrolled distance within the pinned section
+      const scrolled = -(rect.top - navbarHeight);
+      const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
 
-        // Update stepper line progress smoothly
-        if (stepperProgress) {
-          stepperProgress.style.width = '100%';
-          stepperProgress.style.height = `${progress * 100}%`;
-        }
+      // Update stepper line progress smoothly (vertical line)
+      if (stepperProgress) {
+        stepperProgress.style.width = '100%';
+        stepperProgress.style.height = `${progress * 100}%`;
+      }
 
-        // Determine active card based on scroll progress
-        const targetIndex = Math.min(totalPillars - 1, Math.floor(progress * totalPillars));
-        if (targetIndex !== currentPillar) {
-          updatePillarDisplay(targetIndex);
-        }
-      } else {
-        // Mobile layout: update line progress based on active dot
-        if (stepperProgress) {
-          const pct = (currentPillar / (totalPillars - 1)) * 100;
-          stepperProgress.style.height = '100%';
-          stepperProgress.style.width = `${pct}%`;
-        }
+      // Determine active card based on scroll progress
+      const targetIndex = Math.min(totalPillars - 1, Math.floor(progress * totalPillars));
+      if (targetIndex !== currentPillar) {
+        updatePillarDisplay(targetIndex);
       }
     }
 
@@ -362,35 +352,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth scroll to specific card when clicking stepper dots
     function scrollToPillar(idx) {
-      const isMobile = window.innerWidth <= 1024;
       updatePillarDisplay(idx);
 
-      if (!isMobile) {
-        const navbarHeight = 80;
-        const totalScrollable = servicePillarsSection.offsetHeight - (window.innerHeight - navbarHeight);
-        const sectionTop = servicePillarsSection.offsetTop;
-        
-        // Target segment for that pillar
-        const segmentSize = totalScrollable / totalPillars;
-        const targetScroll = sectionTop - navbarHeight + (idx * segmentSize) + (segmentSize * 0.2);
+      const navbarHeight = window.innerWidth <= 768 ? 68 : 80;
+      const totalScrollable = servicePillarsSection.offsetHeight - (window.innerHeight - navbarHeight);
+      const sectionTop = servicePillarsSection.offsetTop;
+      
+      // Target segment for that pillar
+      const segmentSize = totalScrollable / totalPillars;
+      const targetScroll = sectionTop - navbarHeight + (idx * segmentSize) + (segmentSize * 0.2);
 
-        isClickScrolling = true;
-        window.scrollTo({
-          top: targetScroll,
-          behavior: 'smooth'
-        });
+      isClickScrolling = true;
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
 
-        clearTimeout(clickScrollTimer);
-        clickScrollTimer = setTimeout(() => {
-          isClickScrolling = false;
-        }, 750);
-      } else {
-        // On mobile, just switch card and update progress bar
-        if (stepperProgress) {
-          const pct = (idx / (totalPillars - 1)) * 100;
-          stepperProgress.style.width = `${pct}%`;
-        }
-      }
+      clearTimeout(clickScrollTimer);
+      clickScrollTimer = setTimeout(() => {
+        isClickScrolling = false;
+      }, 750);
     }
 
     // Attach click events to stepper dots
