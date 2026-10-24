@@ -993,9 +993,9 @@ h3,
 .problem-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.75rem;
+  gap: 2.25rem;
   margin-bottom: 2.25rem;
-  align-items: end;
+  align-items: start;
 }
 
 .problem-header-col {
@@ -1006,8 +1006,6 @@ h3,
 .solution-header-col {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
 }
 
 .solution-banner-mobile {
@@ -1232,8 +1230,8 @@ h3,
 
   .solution-banner-mobile {
     display: block;
-    margin-top: 0.75rem;
-    margin-bottom: -0.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.5rem;
   }
 
     .problem-grid {
@@ -1669,6 +1667,16 @@ h3,
     line-height: 1.68;
     color: #475569;
     margin-bottom: 0;
+  }
+
+  .showcase-cta {
+    margin-top: 1.75rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .showcase-cta .btn {
+    align-self: flex-start;
   }
 
 
@@ -2685,6 +2693,144 @@ h3,
     box-shadow: 0 4px 12px rgba(11, 78, 74, 0.28);
   }
 
+  .submit-btn:disabled {
+    opacity: 0.8;
+    cursor: wait;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Mail Dispatch Status Notice */
+  .mail-status-notice {
+    margin-bottom: 1.25rem;
+    animation: fadeInNotice 0.3s ease-out;
+  }
+
+  @keyframes fadeInNotice {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mail-notice-card {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 1.15rem 1.25rem;
+    color: #14532d;
+    box-shadow: 0 4px 14px rgba(22, 101, 52, 0.08);
+  }
+
+  .mail-notice-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .mail-notice-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: #dcfce7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #166534;
+    margin-top: 2px;
+  }
+
+  .mail-notice-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #14532d;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-body);
+  }
+
+  .mail-notice-desc {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #166534;
+    margin: 0;
+  }
+
+  .mail-notice-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid #bbf7d0;
+  }
+
+  .btn-mail-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-mail-action.primary-mail-btn {
+    background-color: #0b4e4a;
+    color: #ffffff;
+    border: 1px solid #0b4e4a;
+  }
+
+  .btn-mail-action.primary-mail-btn:hover {
+    background-color: #083c39;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(11, 78, 74, 0.25);
+  }
+
+  .btn-mail-action.gmail-btn {
+    background-color: #ffffff;
+    color: #c5221f;
+    border: 1.5px solid #ea4335;
+  }
+
+  .btn-mail-action.gmail-btn:hover {
+    background-color: #fef2f2;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(234, 67, 53, 0.2);
+  }
+
+  .btn-mail-action.copy-btn {
+    background-color: #ffffff;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+  }
+
+  .btn-mail-action.copy-btn:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+
+  .btn-mail-action.copy-btn.copied {
+    background-color: #22c55e;
+    color: #ffffff;
+    border-color: #22c55e;
+  }
+
+  .mail-notice-footer {
+    margin-top: 0.65rem;
+    font-size: 0.78rem;
+    color: #15803d;
+  }
+
   /* ==========================================================================
    Footer
    ========================================================================== */
@@ -3125,8 +3271,8 @@ h3,
 
     .solution-banner-mobile {
       display: block;
-      margin-top: 0.75rem;
-      margin-bottom: -0.5rem;
+      margin-top: 2.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .problem-grid {

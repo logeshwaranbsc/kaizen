@@ -249,30 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (discoveryForm) {
-    discoveryForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      if (!validateStep1()) {
-        goToStep(1);
-        return;
-      }
-
-      const submitBtn = discoveryForm.querySelector('.submit-btn');
-      const originalText = submitBtn.innerHTML;
-
-      submitBtn.innerHTML = `Submitting...`;
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        alert('Thank you! Your request for a Discovery Call has been submitted successfully. Our team will get in touch with you shortly.');
-        discoveryForm.reset();
-        goToStep(1);
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }, 1000);
-    });
-  }
+  // Expose step navigation globally for mail.js
+  window.goToFormStep = goToStep;
+  window.validateFormStep1 = validateStep1;
 
   // 6. Active Navigation Link Highlighting on Scroll
   const sections = document.querySelectorAll('section[id]');
